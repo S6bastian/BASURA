@@ -79,9 +79,14 @@ void inverso(int B, int A) { //B=n1 y A=mod
     }
 }
 
-int main() {
-    int n1, n2, mod;
+void encriptado() {
+    
+}
 
+int main() {
+    int n1, mod, opc;
+    string prueba="Adasdsadasdsaccc";
+    /*
     cout << "Calculadora de modulos" << endl;
     cout << "Ingrese el primer numero, segundo numero y modulo: " << endl;
     cin >> n1 >> n2 >> mod;
@@ -93,6 +98,29 @@ int main() {
     multiplicacion(n1, n2, mod);
     cout << "--------------------------------------------------------------------------" << endl;
     inverso(n1, mod);
-
+    */
+    while (1) {
+        cout << "Opciones" << endl;
+        cout << "1.Encripta" << endl;
+        cout << "2.Desencripta" << endl;
+        cout << "3.Salir" << endl;
+        cin >> opc;
+        switch (opc) {
+        case 1:
+            cout << "Encriptando...";
+            break;
+        case 2:
+            cout << "Desencriptando...";
+            break;
+        case 3:
+            cout << "Saliendo...";
+            break;
+        }
+    }
     return 0;
 }
+
+
+/*
+Escribir y leer archivo https://www.w3schools.com/cpp/cpp_files.asp
+*/
