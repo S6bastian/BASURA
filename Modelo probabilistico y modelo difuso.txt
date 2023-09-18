@@ -1,0 +1,64 @@
+Modelo probabilistico y modelo difuso 
+-------------------------------
+Modelo Probabilistico
+Estimación de parametros
+-Metodo de maxima verosimilitud
+-Muestreo de Monte Carlo
+
+Inferencia en el modelo
+-Algoritmo de eliminacion de variables
+-Algoritmo de propagacion de creencias
+-Algoritmo de muestreo de Gibbs
+-Algoritmo EM(Expectation-Maximitation)
+
+Beneficios y limitaciones
+Beneficios:
+-Manejo de incertidumbre
+-Resultados precisos
+-Flexibilidad y adaptabilidad
+-Toma de decisiones basada en riesgo
+Limitaciones: 
+-Desafios computacionales
+-Requisito de datos
+-Suposiciones simplificadoras
+-Calidad del modelo
+
+Modelo Difuso
+
+Fundamentos
+-Logica Difusa
+-Teoria de conjuntos difusos
+-Membresia difusa
+-
+
+Operaciones Difusas
+-Union difusa
+-Inteseccion difusa
+-Complementación
+
+Componentes del modelo
+-Conjuntos difusos
+-Funciones de membresía
+-Reglas difusas
+
+Inferencia en el modelo
+-Algoritmo de inferencia de Mandani
+-Algoritmo de inferencia de Sugeno
+-Algoritmo de inferencia de Tsukamoto
+
+Beneficios y limitaciones
+Beneficios:
+-Manejo de incertidumbre
+-Resultados más flexibles
+-Reglas difusas relacionadas a resultados
+Limitaciones:
+-Computacionalmente costoso
+-Dificil de interpretar
+-Es compleja y requiere un cuidadoso diseño
+
+Aplicacion
+Metodología (cascada):
+-Estudio de literatura
+-Recopilacion de datos
+-Diseño del sistema
+-Implementacion
