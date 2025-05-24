@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+template<class T>
+struct Node {
+    T value;
+    int color;
+    Node<T>* next[2];
+
+    Node(T v){
+        value = v;
+        next[0] = next[1] = nullptr;
+        color = 0;
+    }
+};
+
+template<class T>
+struct Tree {
+    Node<T>* root;
+    bool repSide = 0; //replacement side
+
+    Tree() {
+        root = nullptr;
+    }
+
+    Node<T>** getReplacement(Node<T>** pos) {   // only works when there are two childrem
+        pos = &(*pos)->next[repSide];
+        repSide = !repSide;
+
+        while ((*pos)->next[repSide] != nullptr) {
+            pos = &(*pos)->next[repSide];
+        }
+        return pos; 
+    }
+
+    bool find(T x, Node<T>**& pos) {
+        for (pos = &root; *pos != nullptr && (*pos)->value != x; pos = &pos->next[x > pos->next[1]]);
+        return (pos != nullptr);
+    }
+
+    bool insert(T x) {
+        Node<T>** pos = nullptr;
+        if (find(x, pos)) return false;
+        
+        *pos = new Node<T>(x);
+        return true;
+    }
+
+    bool remove(T x) {
+        Node<T>** pos = nullptr;
+        if (!find(x, pos)) return false;
+        
+        if ((*pos)->next[0] != nullptr && (*pos)->next[1] != nullptr) {
+            Node<T>** tmp = getReplacement(pos);
+            (*pos)->value = (*tmp)->value;
+        }
+
+        *pos = (*pos)->next[*pos != nullptr];
+        
+    }
+};
+
+
+int main()
+{
+    cout << "Hello World!\n";
+}
