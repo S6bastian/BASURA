@@ -24,23 +24,25 @@ struct SMatrix{
 	SMatrix(int sizeY, int sizeX){	// Rows and columns 
 		rows = sizeY;
 		columns = sizeX;
-		xAxis = new Node<T>*[sizeX];		// Column[row] of columns
-		yAxis = new Node<T>*[sizeY];		// Row[colum] of rows
+		xAxis = new Node<T>*[sizeY];		// Column[row]
+		yAxis = new Node<T>*[sizeX];		// Row[colum]
 		
-		for(int i = 0; i < columns; i++) *(xAxis+i) = nullptr;
-		for(int i = 0; i < rows; i++) *(yAxis+i) = nullptr;
+		for(int i = 0; i < rows; i++) *(xAxis+i) = nullptr;
+		for(int i = 0; i < columns; i++) *(yAxis+i) = nullptr;
 	}
-	
+		
 	bool findX(int x, int y, Node<T>** &p){ // Finds the X axis pointer to Node
-		for(*p = xAxis[y]; *p != nullptr && (*p)->x < x; p = &(*p)->next[1]);
-		return p && (*p)->x == x;
+		//cout << "DDD \n";
+		for(p = &xAxis[y]; *p != nullptr && (*p)->x < x; p = &(*p)->next[1]);
+		//cout << *p << " <<<<\n";
+		return *p != nullptr && (*p)->x == x;
 	}
 	
 	bool findY(int x, int y, Node<T>** &p){ // Finds the Y axis pointer to Node
 		for(p = &yAxis[x]; *p != nullptr && (*p)->y < y; p = &(*p)->next[0]);
-		return p && (*p)->y == y;
+		return *p && (*p)->y == y;
 	}
-	
+		
 	T get(int x, int y){
 		Node<T>** p;
 		
@@ -50,9 +52,10 @@ struct SMatrix{
 	}
 	
 	void set(int x, int y, T v){
+		//print();
 		Node<T>** p;
 		if(findX(x,y,p)){
-			
+			//cout << "FOUND .l.\n";
 			if(!v){					// Only if v == 0, removes Node
 				Node<T>* tmp = *p;
 				*p = (*p)->next[1];
@@ -67,30 +70,54 @@ struct SMatrix{
 		}
 		
 		Node<T>* tmp = *p = new Node<T>(v,x,y,*p);
-		
-		
+
 		findY(x,y,p);
 		tmp->next[0] = *p;
 		*p = tmp;
 	}
 	
+	T& operator()(int x, int y){ 	// We could use a referece to make this but the problem with this is that if we want to assign a value or get access to the value and it doesn't exist program will crash
+		Node<T>** p;
+		if(findX(x,y,p)) return (*p)->value;
+		
+	}
+	
 	void print(){
+		cout << "------------------------------------------------------------------------------------------------------------------------\n";
 		for(int i = 0; i < columns; i++) cout << "\t" << i;
+		cout << "\n";
+		for(int i = 0; i < columns; i++) cout << "\t|";
+		cout << "\n";
+		for(int i = 0; i < columns; i++) cout << "\tv";
 		cout << "\n";
 		
 		for(int j = 0; j < rows; j++){
 			cout << j << " ->";
 			Node<T>* current = xAxis[j];
 			for(int i = 0; i < columns; i++){
-				if(current->x == i){
-					cout << "\t" << current->value;
-					current = current->next[1];
+				if(!current || current->x != i){
+					cout << "\t0";
+					continue;
 				}
-				else cout << "\t0";
+				cout << "\t" << current->value;
+				current = current->next[1];
 			}
 			cout << "\n";
 		}
+		cout << "------------------------------------------------------------------------------------------------------------------------\n";
 	}
+};
+
+template<class T>
+struct SMAux{
+	SMatrix<T>* aux;
+	int x, y;
+	
+	SMAux(int cx; int cy){
+		x = cx; y = cy;
+	}
+	
+	void operator
 };
 
 int main() {
@@ -103,8 +130,11 @@ int main() {
 	m.set(3,1,20);
 	
 	m.print();
+	m.set(2,1,0);
+	m.print();
+	
+	
 	
 	
 	return 0;
 }
-
